@@ -1,0 +1,310 @@
+" IntelliJ IdeaVim keybindings (add to ~/.ideavimrc)
+" Leader key is Space
+let mapleader = " "
+set clipboard=unnamed
+
+" Enable IdeaVim plugins
+set surround
+set commentary
+set argtextobj
+set textobj-entire
+set ReplaceWithRegister
+set highlightedyank
+
+" Configure highlighted yank
+let g:highlightedyank_highlight_duration = "200"
+let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
+
+" ===== LSP MAPPINGS =====
+" Code actions
+nmap <Space>ca :action ShowIntentionActions<CR>
+nmap <Space>ca :action ShowIntentionActions<CR>
+
+" Rename
+nmap <Space>rn :action RenameElement<CR>
+
+" Workspace symbols
+nmap <Space>ws :action GotoSymbol<CR>
+
+" Document symbols
+nmap <Space>ds :action FileStructurePopup<CR>
+
+" Hover documentation
+nmap <Space><C-k> :action QuickDocumentation <CR>
+
+" Type definition
+nmap <Space>D :action GotoTypeDeclaration<CR>
+
+" Go to declaration
+nmap gD :action GotoDeclaration<CR>
+
+" Go to implementation
+nmap gI :action GotoImplementation<CR>
+
+" Go to references
+nmap gr :action ShowUsages<CR>
+
+" Go to definition
+nmap gd :action GotoDefinition<CR>
+
+" Alternative LSP mappings (gr* series)
+nmap gra :action ShowIntentionActions<CR>
+vmap gra :action ShowIntentionActions<CR>
+nmap grn :action RenameElement<CR>
+nmap grr :action ShowUsages<CR>
+nmap gri :action GotoImplementation<CR>
+nmap grt :action GotoTypeDeclaration<CR>
+
+" Document symbol overview
+nmap gO :action FileStructurePopup<CR>
+
+" ===== SEARCH MAPPINGS =====
+" Search files
+nmap <Space>sf :action GotoFile<CR>
+
+" Search keymaps
+nmap <Space>sk :action GotoAction<CR>
+
+" Search help
+nmap <Space>sh :action HelpTopics<CR>
+
+" Search select telescope (search everywhere)
+nmap <Space>ss :action SearchEverywhere<CR>
+
+" Search current word
+nmap <Space>sw :action FindInPath<CR>
+
+" Search by grep (find in files)
+nmap <Space>sg :action FindInPath<CR>
+
+" Search diagnostics
+nmap <Space>sd :action ActivateProblemsViewToolWindow<CR>
+
+" Search resume (recent files)
+nmap <Space>sr :action RecentFiles<CR>
+
+" Search recent files
+nmap <Space>s. :action RecentFiles<CR>
+
+" Find existing buffers
+nmap <Space><Space> :action RecentFiles<CR>
+
+" Fuzzily search in current buffer
+nmap <Space>/ :action Find<CR>
+
+" Search in open files
+nmap <Space>s/ :action FindInPath<CR>
+
+" Search Neovim files (project files)
+nmap <Space>sn :action GotoFile<CR>
+
+" ===== FILE/PROJECT NAVIGATION =====
+" File explorer (project view)
+nmap <Space>pv :action ActivateProjectToolWindow<CR>
+
+" NeoTree reveal equivalent
+nmap <Space>\ :action SelectInProjectView<CR>
+
+" ===== FORMATTING =====
+" Format buffer
+nmap <Space>f :action ReformatCode<CR>
+vmap <Space>f :action ReformatCode<CR>
+
+" ===== DIAGNOSTICS =====
+" Open diagnostic quickfix list
+nmap <Space>q :action ActivateProblemsViewToolWindow<CR>
+
+" Diagnostic navigation
+nmap ]d :action GotoNextError<CR>
+nmap [d :action GotoPreviousError<CR>
+nmap ]D :action GotoNextError<CR>
+nmap [D :action GotoPreviousError<CR>
+
+" ===== GIT MAPPINGS =====
+" Git add and commit
+nmap <Space>gs :action Vcs.QuickListPopupAction<CR>
+
+" ===== DEBUGGING =====
+" Toggle breakpoint
+nmap <Space>b :action ToggleLineBreakpoint<CR>
+
+" Set breakpoint
+nmap <Space>B :action ToggleLineBreakpoint<CR>
+
+" Debug controls
+nmap <F5> :action Resume<CR>
+nmap <F1> :action StepInto<CR>
+nmap <F2> :action StepOver<CR>
+nmap <F3> :action StepOut<CR>
+nmap <F7> :action ShowExecutionPoint<CR>
+
+" ===== COPILOT/AI EQUIVALENT =====
+" Code explanation (IntelliJ doesn't have exact Copilot equivalent, using documentation)
+nmap <Space>ce :action QuickJavaDoc<CR>
+vmap <Space>ce :action QuickJavaDoc<CR>
+
+" Code review (use inspection results)
+nmap <Space>cr :action InspectCode<CR>
+vmap <Space>cr :action InspectCode<CR>
+
+" Generate tests
+nmap <Space>ct :action GenerateTestMethod<CR>
+vmap <Space>ct :action GenerateTestMethod<CR>
+
+" Refactor code
+nmap <Space>cf :action Refactorings.QuickListPopupAction<CR>
+vmap <Space>cf :action Refactorings.QuickListPopupAction<CR>
+
+" Open AI assistant (if available)
+nmap <Space>cc :action ActivateAIAssistantToolWindow<CR>
+
+" ===== UNDO TREE =====
+" Undo tree (Local History)
+nmap <Space>u :action LocalHistory.ShowHistory<CR>
+
+" ===== WINDOW NAVIGATION =====
+" Move focus between windows
+nmap <C-H> <C-W>h
+nmap <C-J> <C-W>j
+nmap <C-K> <C-W>k
+nmap <C-L> <C-W>l
+
+" ===== BUFFER NAVIGATION =====
+" Next/previous buffer
+nmap ]b :action NextTab<CR>
+nmap [b :action PreviousTab<CR>
+nmap ]B :action NextTab<CR>
+nmap [B :action PreviousTab<CR>
+
+" ===== QUICKFIX/LOCATION LIST NAVIGATION =====
+" Next/previous in quickfix
+nmap ]q :action GotoNextError<CR>
+nmap [q :action GotoPreviousError<CR>
+nmap ]Q :action GotoNextError<CR>
+nmap [Q :action GotoPreviousError<CR>
+
+" ===== ADDITIONAL USEFUL MAPPINGS =====
+" Clear search highlighting
+nmap <Esc> :nohlsearch<CR><Esc>
+
+" Open terminal
+nmap <Space>t :action ActivateTerminalToolWindow<CR>
+
+" Toggle zen mode / distraction free mode
+nmap <Space>z :action ToggleDistractionFreeMode<CR>
+
+" Recent locations
+nmap <Space>rl :action RecentLocations<CR>
+
+" ===== INSERT MODE MAPPINGS =====
+" Exit insert mode and save (your custom jj mapping)
+imap jj <Esc>:w<CR>
+
+" LSP signature help
+imap <C-S> <C-O>:action ParameterInfo<CR>
+
+" Copilot/AI Code Completion equivalents
+" Accept suggestion
+imap <Tab> <C-O>:action EditorChooseLookupItem<CR>
+
+" Dismiss suggestion  
+imap <C-]> <C-O>:action EditorEscape<CR>
+
+" Next/Previous suggestions (IntelliJ completion navigation)
+imap <M-]> <C-O>:action EditorDown<CR>
+imap <M-[> <C-O>:action EditorUp<CR>
+
+" Open AI assistant panel (if available)
+imap <M-CR> <C-O>:action ActivateAIAssistantToolWindow<CR>
+
+" Snippet navigation (Tab/Shift-Tab for live templates)
+imap <S-Tab> <C-O>:action PreviousTemplateVariable<CR>
+
+" Additional insert mode conveniences
+" Code completion trigger
+imap <C-Space> <C-O>:action CodeCompletion<CR>
+
+" Quick documentation
+imap <C-Q> <C-O>:action QuickJavaDoc<CR>
+
+" Auto-complete and format
+imap <C-F> <C-O>:action ReformatCode<CR>
+
+" Smart completion (IntelliJ's advanced completion)
+imap <C-Y> <C-O>:action SmartTypeCompletion<CR>
+
+" Escape from any popup
+imap <C-E> <C-O>:action EditorEscape<CR>
+
+" Completion navigation
+imap <C-N> <C-O>:action EditorDown<CR>
+imap <C-P> <C-O>:action EditorUp<CR>
+
+" Run configuration
+nmap <Space>r :action ChooseRunConfiguration<CR>
+
+" Toggle project tool window
+nmap <Space>e :action ActivateProjectToolWindow<CR>
+
+" Show bookmarks
+nmap <Space>m :action ShowBookmarks<CR>
+
+" Add line above/below
+nmap [<Space> O<Esc>j
+nmap ]<Space> o<Esc>k
+
+" Move lines up/down
+nmap <A-j> :action MoveLineDown<CR>
+nmap <A-k> :action MoveLineUp<CR>
+vmap <A-j> :action MoveLineDown<CR>
+vmap <A-k> :action MoveLineUp<CR>
+
+" Duplicate line
+nmap <Space>d :action EditorDuplicate<CR>
+
+" Close tab
+nmap <Space>x :action CloseContent<CR>
+
+" Open file manager
+nmap gx :action ShowInFinder<CR>
+
+" ===== VISUAL MODE MAPPINGS =====
+" Format selection
+vmap <Space>f :action ReformatCode<CR>
+
+" CopilotChat equivalents for visual selections
+" Generate tests for selection
+vmap <Space>ct :action GenerateTestMethod<CR>
+
+" Review code (inspection for selection)
+vmap <Space>cr :action InspectCode<CR>
+
+" Explain code (quick documentation)
+vmap <Space>ce :action QuickJavaDoc<CR>
+
+" Refactor selection
+vmap <Space>cf :action Refactorings.QuickListPopupAction<CR>
+
+" LSP code actions for selection
+vmap gra :action ShowIntentionActions<CR>
+
+" Comment toggle for selection (using commentary plugin)
+vmap gc :action CommentByLineComment<CR>
+
+" Search for selection
+vmap * :action FindWordAtCaret<CR>
+vmap # :action FindWordAtCaret<CR>
+
+" Open file/URL under cursor
+vmap gx :action ShowInFinder<CR>
+
+" Text object movements (enhanced by IdeaVim plugins)
+" Note: Many of these work automatically with argtextobj and textobj-entire plugins
+
+" ===== SELECT MODE MAPPINGS =====
+" Snippet navigation in select mode
+smap <Tab> <C-O>:action NextTemplateVariable<CR>
+smap <S-Tab> <C-O>:action PreviousTemplateVariable<CR>
+
+" LSP signature help in select mode  
+s
