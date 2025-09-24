@@ -288,10 +288,10 @@ vmap <Space>cf :action Refactorings.QuickListPopupAction<CR>
 " LSP code actions for selection
 vmap gra :action ShowIntentionActions<CR>
 
-" Comment toggle for selection (using commentary plugin)
-vmap gc :action CommentByLineComment<CR>
+nmap gc :action CommentByLineComment<CR>
+" Comment/uncomment the selected lines in Visual Mode
+vmap gc :action CommentByLineComment<CR>" Search for selection
 
-" Search for selection
 vmap * :action FindWordAtCaret<CR>
 vmap # :action FindWordAtCaret<CR>
 
