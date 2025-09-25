@@ -1,0 +1,170 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Edit by : Ghostvox & Gemini
+ * Converted to Catppuccin Macchiato
+ *
+ * Rofi Theme File
+ * Rofi Version: 1.7.3
+ */
+
+/*****----- Configuration -----*****/
+configuration {
+    modi:                   "drun,run,filebrowser,nerdy,emoji,calc";
+    show-icons:             true;
+    display-drun:           "";
+    display-run:            "";
+    display-filebrowser:    "";
+    display-nerdy:          "󰓠";
+    display-emoji:          "󰞅";
+    display-calc:           "";
+    drun-display-format:    "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+    window-format:          "{w} · {c} · {t}";
+}
+
+/*****----- Global Properties -----*****/
+@import "shared/colors.rasi"
+@import "shared/fonts.rasi"
+
+* {
+    /* Make all backgrounds transparent by default to stack colors */
+    background-color: transparent;
+    text-color:       @foreground;
+}
+
+/*****----- Main Window -----*****/
+window {
+    /* Use our Catppuccin colors */
+    background-color: @background;
+    border:           2px;
+    border-radius:    15px 0px 0px 15px; /* Rounded on the inside corners */
+    border-color:     @mauve;
+
+    /* Layout from the original theme */
+    transparency:     "real";
+    location:         east;
+    anchor:           east;
+    height:           100%;
+    width:            500px;
+    x-offset:         -2px; /* Adjust to align border perfectly */
+    y-offset:         0px;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    padding:          25px;
+    spacing:          20px;
+    children:         [ "inputbar", "listview", "mode-switcher" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    background-color: @background-alt;
+    padding:          10px;
+    border-radius:    8px;
+    spacing:          10px;
+    children:         [ "prompt", "entry" ];
+}
+
+prompt {
+    text-color:       @blue;
+}
+entry {
+    placeholder:      "Search...";
+}
+
+/*****----- Listview -----*****/
+listview {
+    lines:            12;
+    cycle:            true;
+    dynamic:          true;
+    scrollbar:        false;
+    layout:           vertical;
+    spacing:          10px;
+}
+
+/*****----- Elements -----*****/
+element {
+    padding:          10px;
+    border-radius:    8px;
+    cursor:           pointer;
+}
+
+element-text {
+    vertical-align:   0.5;
+}
+
+element-icon {
+    size:             24px;
+    margin:           0px 10px 0px 0px;
+}
+
+element normal.normal {
+    background-color: @background;
+    text-color:       @foreground;
+}
+
+element normal.urgent {
+    background-color: @urgent;
+    text-color:       @background;
+}
+
+element normal.active {
+    background-color: @active;
+    text-color:       @background;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color:       @background;
+}
+
+element selected.urgent {
+    background-color: @urgent;
+    text-color:       @background;
+}
+
+element selected.active {
+    background-color: @active;
+    text-color:       @background;
+}
+
+element alternate.normal {
+    background-color: @background;
+    text-color:       @foreground;
+}
+
+
+/*****----- Mode Switcher -----*****/
+mode-switcher{
+    spacing:          10px;
+}
+
+button {
+    background-color: @background-alt;
+    padding:          10px;
+    border-radius:    8px;
+    cursor:           pointer;
+}
+
+button selected {
+    background-color: @selected;
+    text-color:       @background;
+}
+
+/*****----- Message -----*****/
+message {
+    padding:          10px;
+    border-radius:    8px;
+    background-color: @background-alt;
+}
+textbox {
+    background-color: inherit;
+}
+error-message {
+    padding:          15px;
+    border-radius:    8px;
+    background-color: @background;
+    border:           2px solid;
+    border-color:     @red;
+}

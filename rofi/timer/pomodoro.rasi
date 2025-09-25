@@ -1,0 +1,220 @@
+/**
+ * Author : SUDOER1337
+ * Rofi Pomodoro Timer Theme
+ * Based on your calc theme
+ **/
+
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 false;
+    display-dmenu:              "🍅 Pomodoro";
+}
+
+/*****----- Global Properties -----*****/
+@import                          "shared/colors.rasi"
+@import                          "shared/fonts.rasi"
+
+* {
+    border-colour:               var(selected);
+    handle-colour:               var(foreground);
+    background-colour:           var(background);
+    foreground-colour:           var(foreground);
+    alternate-background:        var(background-alt);
+    normal-background:           var(background);
+    normal-foreground:           var(foreground);
+    urgent-background:           var(urgent);
+    urgent-foreground:           var(background);
+    active-background:           var(active);
+    active-foreground:           var(background);
+    selected-normal-background:  var(selected);
+    selected-normal-foreground:  var(background);
+    selected-urgent-background:  var(active);
+    selected-urgent-foreground:  var(background);
+    selected-active-background:  var(urgent);
+    selected-active-foreground:  var(background);
+    alternate-normal-background: var(background);
+    alternate-normal-foreground: var(foreground);
+    alternate-urgent-background: var(urgent);
+    alternate-urgent-foreground: var(background);
+    alternate-active-background: var(active);
+    alternate-active-foreground: var(background);
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       480px;
+    height:                      400px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                @border-colour;
+    cursor:                      "default";
+    background-color:            @background-colour;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     20px;
+    margin:                      0px;
+    padding:                     30px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @border-colour;
+    background-color:            transparent;
+    children:                    [ "inputbar", "message", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     15px;
+    margin:                      0px 0px 10px 0px;
+    padding:                     15px 20px;
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                @selected;
+    background-color:            @selected;
+    text-color:                  @background;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @background;
+    font:                        "JetBrains Mono Bold 14";
+}
+
+entry {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @background;
+    cursor:                      text;
+    placeholder:                 "Pomodoro Timer";
+    placeholder-color:           @background;
+    font:                        "JetBrains Mono 12";
+}
+
+/*****----- Message Box -----*****/
+message {
+    enabled:                     true;
+    margin:                      0px 0px 15px 0px;
+    padding:                     12px 15px;
+    border:                      1px solid;
+    border-radius:               8px;
+    border-color:                @active;
+    background-color:            @active;
+    text-color:                  @background;
+}
+
+textbox {
+    background-color:            transparent;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    font:                        "JetBrains Mono 10";
+    highlight:                   none;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       8;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     8px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @border-colour;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+    cursor:                      "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     12px 16px;
+    border:                      0px solid;
+    border-radius:               8px;
+    border-color:                @border-colour;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+    cursor:                      pointer;
+}
+
+element normal.normal {
+    background-color:            var(normal-background);
+    text-color:                  var(normal-foreground);
+}
+
+element selected.normal {
+    background-color:            var(selected-normal-background);
+    text-color:                  var(selected-normal-foreground);
+    border:                      2px solid;
+    border-color:                @border-colour;
+    font:                        "JetBrains Mono Bold 11";
+}
+
+element alternate.normal {
+    background-color:            var(alternate-normal-background);
+    text-color:                  var(alternate-normal-foreground);
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    font:                        "JetBrains Mono 11";
+}
+
+/*****----- Pomodoro Specific Styling -----*****/
+/* Status display (first element) */
+element:first-child {
+    background-color:            @active;
+    text-color:                  @background;
+    font:                        "JetBrains Mono Bold 12";
+    border:                      2px solid;
+    border-color:                @active;
+}
+
+/* Separator elements */
+element-text[text="---"] {
+    text-color:                  @alternate-normal-foreground;
+    font:                        "JetBrains Mono 8";
+    padding:                     2px;
+}
+
+/* Timer control buttons */
+element-text[text*="🍅"], element-text[text*="☕"], element-text[text*="🛋️"] {
+    font:                        "JetBrains Mono Bold 11";
+}
+
+/* Settings and utility items */
+element-text[text*="⚙️"], element-text[text*="📊"], element-text[text*="🔄"] {
+    text-color:                  @alternate-normal-foreground;
+    font:                        "JetBrains Mono 10";
+}

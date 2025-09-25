@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+text=$(date '+%d')
+alt=$(date '+%A, %B %d, %Y')  # e.g., "Wednesday, September 18, 2025"
+tooltip=$(cal -m | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')  # -m for Monday as first day
+printf '{"text": "%s", "alt": "%s", "tooltip": "%s"}\n' "$text" "$alt" "$tooltip"

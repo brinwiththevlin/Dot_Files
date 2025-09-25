@@ -9,11 +9,16 @@ set commentary
 set argtextobj
 set textobj-entire
 set ReplaceWithRegister
+set which-key
 set highlightedyank
+
+set timeoutlen=5000
 
 " Configure highlighted yank
 let g:highlightedyank_highlight_duration = "200"
-let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
+let g:highlightedyank_highlight_color = "rgba(213, 108, 40, 100)"
+
+
 
 " ===== LSP MAPPINGS =====
 " Code actions

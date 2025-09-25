@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# System update script using pacman
+# If the operating system is not Arch Linux, exit the script successfully
+if [ ! -f /etc/arch-release ]; then
+    exit 0
+fi
+
+# Calculate updates using pacman only
+OFFICIAL=$(checkupdates 2>/dev/null | wc -l)
+ALL=$(pacman -Q | wc -l)
+
+# Case/switch for each service updates
+case $1 in
+    official) echo " $OFFICIAL";;
+esac
+
+# If the parameter is "update", update using pacman
+if [ "$1" = "update" ]; then
+    ghostty sudo pacman -Syu; pkill -SIGRTMIN+8 waybar
+fi
+
+# If there aren't any parameters, return the number of updates
+if [ "$1" = "" ]; then
+    if [[ "$OFFICIAL" = "0" ]]; then
+        printf '{"text": "", "tooltip": "System up to date (%s packages installed)"}\n' "$ALL"
+    else
+        printf '{"text": " %s", "tooltip": "%s updates available (%s total packages)"}\n' "$OFFICIAL" "$OFFICIAL" "$ALL"
+    fi
+fi
