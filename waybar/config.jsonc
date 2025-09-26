@@ -20,6 +20,7 @@
 
     "modules-right": [
         "tray",
+        "custom/swaync",
         "pulseaudio",
         "pulseaudio#microphone",
         "cpu",
@@ -35,7 +36,7 @@
 
     "custom/rofi": {
         "format": "",
-        "on-click": "wofi --show drun",
+        "on-click": "rofi -show drun",
         "tooltip": false
     },
 
@@ -44,7 +45,26 @@
         "on-click": "~/.config/waybar/scripts/power-menu",
         "tooltip": "Power Menu"
     },
-
+    "custom/swaync": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "🔔",
+            "none": "",
+            "dnd-notification": "🔕",
+            "dnd-none": "🔕",
+            "inhibited-notification": "🔔",
+            "inhibited-none": "🔕",
+            "dnd-inhibited-notification": "🔕",
+            "dnd-inhibited-none": "🔕"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
 
     "custom/lock_screen": {
         "format": "",
@@ -70,7 +90,7 @@
         "on-click": "activate",
         "on-click-middle": "close",
         "ignore-list": [
-            "wofi"
+            "rofi"
          ]
     },
 

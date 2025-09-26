@@ -1,0 +1,156 @@
+* {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 500;
+    color: #cdd6f4; /* Catppuccin Mocha Text */
+}
+
+.blank-window {
+    background: transparent;
+}
+
+.notification-action,
+.notification-default-action,
+.control-center {
+    border-radius: 12px;
+    border: 2px solid rgba(137, 180, 250, 0.3); /* Blue with transparency */
+    background: rgba(30, 30, 46, 0.9); /* Base with 0.9 transparency */
+}
+
+.notification {
+    box-shadow: 0 4px 8px rgba(17, 17, 27, 0.6); /* Crust shadow */
+    border-radius: 12px;
+    margin: 6px;
+    background: rgba(49, 50, 68, 0.9); /* Surface0 with transparency */
+    border: 1px solid rgba(116, 199, 236, 0.2); /* Sapphire border */
+}
+
+.notification-content {
+    margin: 12px;
+    padding: 8px;
+}
+
+.notification-default-action {
+    background: rgba(49, 50, 68, 0.9); /* Surface0 */
+}
+
+.notification-default-action:hover {
+    background: rgba(69, 71, 90, 0.9); /* Surface1 */
+}
+
+.control-center {
+    background: rgba(30, 30, 46, 0.9); /* Base */
+    border: 2px solid rgba(137, 180, 250, 0.3); /* Blue */
+    margin: 8px;
+    padding: 12px;
+}
+
+.control-center .notification-row {
+    background: rgba(49, 50, 68, 0.8); /* Surface0 */
+    border-radius: 8px;
+    margin: 4px 0;
+}
+
+.control-center .notification-row:hover {
+    background: rgba(69, 71, 90, 0.8); /* Surface1 */
+}
+
+.widget-dnd {
+    font-weight: bold;
+    margin: 1em;
+    color: #f5c2e7; /* Pink */
+}
+
+.widget-dnd > switch {
+    border: 1px solid rgba(203, 166, 247, 0.4); /* Mauve */
+    border-radius: 12px;
+    background: rgba(49, 50, 68, 0.9); /* Surface0 */
+    padding: 2px;
+}
+
+.widget-dnd > switch slider {
+    border: 1px solid rgba(203, 166, 247, 0.6); /* Mauve */
+    border-radius: 10px;
+    background: rgba(30, 30, 46, 0.9); /* Base */
+    box-shadow: none;
+}
+
+.widget-dnd > switch:checked {
+    background: rgba(166, 227, 161, 0.3); /* Green */
+}
+
+.widget-dnd > switch:checked slider {
+    background: #a6e3a1; /* Green */
+}
+
+.widget-mpris {
+    border-radius: 12px;
+    background: rgba(49, 50, 68, 0.9); /* Surface0 */
+    border: 1px solid rgba(180, 190, 254, 0.3); /* Lavender */
+    margin: 1em;
+    padding: 12px;
+}
+
+.widget-mpris-player {
+    background: rgba(69, 71, 90, 0.8); /* Surface1 */
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.widget-buttons-grid {
+    margin: 1em;
+    background: rgba(49, 50, 68, 0.9); /* Surface0 */
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+    box-shadow: none;
+    color: #cdd6f4; /* Text */
+    font-weight: 500;
+    border: 1px solid rgba(137, 180, 250, 0.3); /* Blue */
+    background: rgba(69, 71, 90, 0.9); /* Surface1 */
+    border-radius: 8px;
+    margin: 4px;
+    padding: 8px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+    background: rgba(88, 91, 112, 0.9); /* Surface2 */
+    border-color: rgba(137, 180, 250, 0.5); /* Blue */
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:active {
+    background: rgba(137, 180, 250, 0.2); /* Blue */
+}
+
+.notification-group {
+    background: rgba(49, 50, 68, 0.9); /* Surface0 */
+    border-radius: 12px;
+    margin: 4px;
+    border: 1px solid rgba(116, 199, 236, 0.2); /* Sapphire */
+}
+
+.notification-group-headers {
+    background: rgba(69, 71, 90, 0.9); /* Surface1 */
+    color: #89b4fa; /* Blue */
+    font-weight: bold;
+}
+
+.close-button {
+    background: rgba(243, 139, 168, 0.8); /* Red */
+    color: #1e1e2e; /* Base */
+    border-radius: 50%;
+    border: none;
+}
+
+.close-button:hover {
+    background: #f38ba8; /* Red solid */
+}
+
+.notification-row {
+    transition: all 0.2s ease;
+}
+
+.notification-row:hover {
+    background: rgba(69, 71, 90, 0.8); /* Surface1 */
+}
