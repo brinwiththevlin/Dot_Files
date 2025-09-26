@@ -5,9 +5,43 @@ from datetime import datetime
 import sys
 import os
 import subprocess
+import fcntl
+import time
 from pathlib import Path
 
+# Add these constants after your existing constants
+CACHE_DIR = Path.home() / ".cache" / "waybar"
+LOCATION_CACHE = CACHE_DIR / "location.json"
+WEATHER_CACHE = CACHE_DIR / "weather.json" 
+CACHE_DURATION = 3600  # 1 hour in seconds
+
+# Ensure cache directory exists
+CACHE_DIR.mkdir(parents=True, exist_ok=True)
+
 # Load environment variables from .env file
+
+def get_cached_location():
+    """Get cached location data if available and fresh."""
+    if not LOCATION_CACHE.exists():
+        return None
+    
+    try:
+        stat = LOCATION_CACHE.stat()
+        if time.time() - stat.st_mtime > CACHE_DURATION:
+            return None  # Cache expired
+            
+        with open(LOCATION_CACHE, 'r') as f:
+            return json.loads(f.read())
+    except (json.JSONDecodeError, OSError):
+        return None
+
+def cache_location(location_data):
+    """Cache location data to file."""
+    try:
+        with open(LOCATION_CACHE, 'w') as f:
+            json.dump(location_data, f)
+    except OSError:
+        pass  # Ignore cache write failures
 def load_env_file():
     """Load environment variables from .env file in parent directory."""
     # Get the directory where this script is located
@@ -86,39 +120,82 @@ WEATHER_CODES = {
 }
 
 def get_current_location():
-    """Get current location using IP geolocation."""
+    """Get current location using ip-api.com."""
+    # Try cached location first
+    cached_location = get_cached_location()
+    if cached_location:
+        return cached_location
+    # Use file locking to prevent multiple instances from fetching simultaneously
+    lock_file = CACHE_DIR / "location.lock"
+    # File locking code stays the same...
     try:
-        # Using ipapi.co - free, no API key required
-        response = requests.get('https://ipapi.co/json/', timeout=TIMEOUT)
-        response.raise_for_status()
-        data = response.json()
-        
-        latitude = float(data['latitude'])
-        longitude = float(data['longitude'])
-        city = data['city']
-        region = data['region']
-        country = data['country_name']
-        
-        location_name = f"{city}, {region}"
-        if country != "United States":
-            location_name += f", {country}"
-        
-        return {
-            'latitude': latitude,
-            'longitude': longitude,
-            'location_name': location_name,
-            'city': city,
-            'region': region,
-            'country': country
-        }
-        
+        with open(lock_file, 'w') as lock:
+            try:
+                fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+                
+                # Double-check cache after acquiring lock
+                cached_location = get_cached_location()
+                if cached_location:
+                    return cached_location
+                
+                # ip-api.com endpoint
+                response = requests.get('http://ip-api.com/json/', timeout=TIMEOUT)
+                response.raise_for_status()
+                data = response.json()
+                
+                if data['status'] != 'success':
+                    raise ValueError(f"API error: {data.get('message', 'Unknown error')}")
+                
+                latitude = float(data['lat'])
+                longitude = float(data['lon'])
+                city = data['city']
+                region = data['regionName']  # Different field name
+                country = data['country']
+                
+                location_name = f"{city}, {region}"
+                if country != "United States":
+                    location_name += f", {country}"
+                
+                location_data = {
+                    'latitude': latitude,
+                    'longitude': longitude,
+                    'location_name': location_name,
+                    'city': city,
+                    'region': region,
+                    'country': country
+                }
+                
+                cache_location(location_data)
+                return location_data
+                
+            except BlockingIOError:                # Another instance is fetching location, wait and try cache again
+                time.sleep(1)
+                cached_location = get_cached_location()
+                if cached_location:
+                    return cached_location
+                
+                # If still no cache, return fallback
+                return None
+                
     except requests.exceptions.RequestException as e:
         print(f"Error getting location: {e}", file=sys.stderr)
+        # Try to return stale cache if available
+        if LOCATION_CACHE.exists():
+            try:
+                with open(LOCATION_CACHE, 'r') as f:
+                    return json.loads(f.read())
+            except (json.JSONDecodeError, OSError):
+                pass
         return None
     except (KeyError, ValueError) as e:
         print(f"Error parsing location data: {e}", file=sys.stderr)
         return None
-
+    finally:
+        # Clean up lock file
+        try:
+            lock_file.unlink(missing_ok=True)
+        except OSError:
+            pass
 def get_weather_icon(condition):
     """Get weather icon based on condition string."""
     condition_lower = condition.lower()
