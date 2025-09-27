@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 case "$1" in
   3)
-    output=$(hyprshot -m window 2>&1)
+    output=$(hyprshot -m window )
     if [ -z "$output" ]; then
       # No output = success
       paplay "/usr/share/sounds/freedesktop/stereo/screen-capture.oga"
