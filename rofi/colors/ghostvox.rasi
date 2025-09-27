@@ -1,9 +1,8 @@
 /**
- * Catppuccin Macchiato Colors
+ * Catppuccin Macchiato Colors with RGBA variants
  */
-
 * {
-    /* Official Palette */
+    /* Official Palette - Original Hex Colors */
     rosewater:  #f4dbd6;
     flamingo:   #f0c6c6;
     pink:       #f5bde6;
@@ -26,20 +25,51 @@
     overlay2:   #939ab7;
     overlay1:   #8087a2;
     overlay0:   #6e738d;
-
     surface2:   #5b6078;
     surface1:   #494d64;
     surface0:   #363a4f;
-
     base:       #24273a;
     mantle:     #1e2030;
     crust:      #181926;
 
-    /* Theme-specific color names */
-    background:     @base;
-    background-alt: @surface0;
-    foreground:     @text;
-    selected:       @blue;
-    active:         @green;
-    urgent:         @red;
+    /* RGBA Variants for Transparency */
+    /* Background colors with transparency */
+    base-rgba-90:       rgba(36, 39, 58, 0.9);    /* 90% opacity */
+    base-rgba-80:       rgba(36, 39, 58, 0.8);    /* 80% opacity */
+    base-rgba-70:       rgba(36, 39, 58, 0.7);    /* 70% opacity */
+    base-rgba-60:       rgba(36, 39, 58, 0.6);    /* 60% opacity */
+    
+    surface0-rgba-90:   rgba(54, 58, 79, 0.9);
+    surface0-rgba-80:   rgba(54, 58, 79, 0.8);
+    surface0-rgba-70:   rgba(54, 58, 79, 0.7);
+    surface0-rgba-60:   rgba(54, 58, 79, 0.6);
+    
+    surface1-rgba-90:   rgba(73, 77, 100, 0.9);
+    surface1-rgba-80:   rgba(73, 77, 100, 0.8);
+    surface1-rgba-70:   rgba(73, 77, 100, 0.7);
+    
+    mantle-rgba-90:     rgba(30, 32, 48, 0.9);
+    mantle-rgba-80:     rgba(30, 32, 48, 0.8);
+    mantle-rgba-70:     rgba(30, 32, 48, 0.7);
+    
+    crust-rgba-90:      rgba(24, 25, 38, 0.9);
+    crust-rgba-80:      rgba(24, 25, 38, 0.8);
+    crust-rgba-70:      rgba(24, 25, 38, 0.7);
+
+    /* Accent colors with transparency */
+    blue-rgba-90:       rgba(138, 173, 244, 0.9);
+    blue-rgba-80:       rgba(138, 173, 244, 0.8);
+    blue-rgba-70:       rgba(138, 173, 244, 0.7);
+    
+    mauve-rgba-90:      rgba(198, 160, 246, 0.9);
+    mauve-rgba-80:      rgba(198, 160, 246, 0.8);
+    mauve-rgba-70:      rgba(198, 160, 246, 0.7);
+
+    /* Theme-specific color names - you can choose transparency level */
+    background:     @base-rgba-80;        /* Semi-transparent background */
+    background-alt: @surface0-rgba-70;    /* More transparent alt background */
+    foreground:     @text;                /* Keep text solid */
+    selected:       @blue-rgba-90;        /* Slightly transparent selection */
+    active:         @green;               /* Keep active solid */
+    urgent:         @red;                 /* Keep urgent solid */
 }

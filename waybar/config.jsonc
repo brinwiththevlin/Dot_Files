@@ -5,7 +5,8 @@
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
-    "height": 42,
+    "height": 48,
+    "margin": 0,
     "modules-left": [
         "custom/rofi",
         "custom/weather",

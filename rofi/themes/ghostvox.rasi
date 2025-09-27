@@ -35,21 +35,17 @@ configuration {
 /*****----- Main Window -----*****/
 window {
     /* Use our Catppuccin colors */
-    background-color: @background;
-    border:           2px;
-    border-radius:    15px 0px 0px 15px; /* Rounded on the inside corners */
-    border-color:     @mauve;
-
-    /* Layout from the original theme */
-    transparency:     "real";
+    background-color: @base-rgba-80;  /* Semi-transparent background */
+    border:           2px solid;  /* Fixed this line */
+    border-radius:    15px 0px 0px 15px;
+    border-color:     @mauve-rgba-80;
     location:         east;
     anchor:           east;
     height:           100%;
     width:            500px;
-    x-offset:         -2px; /* Adjust to align border perfectly */
+    x-offset:         -2px;
     y-offset:         0px;
 }
-
 /*****----- Main Box -----*****/
 mainbox {
     padding:          25px;
