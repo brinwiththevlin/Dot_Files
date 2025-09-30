@@ -23,3 +23,4 @@ CHOICE=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -
 
 # Set wallpaper with hyprpaper reload method (faster, no need to preload)
 [[ -n "$CHOICE" ]] && hyprctl hyprpaper reload ",$WALLPAPER_DIR/$CHOICE"
+ln  -sf "$WALLPAPER_DIR/$CHOICE" "$HOME/.config/hypr/current_wallpaper"

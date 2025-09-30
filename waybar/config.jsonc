@@ -121,27 +121,28 @@
     },
     
     "disk": {
-        "interval": 600,
-        "format": "󰋊",
-        "path": "/",
-        "format-alt-click": "click-right",
-        "format-alt": "󰋊 {percentage_used}%",
-        "tooltip": true,
-        "tooltip-format": "HDD - {used} used out of {total} on {path} ({percentage_used}%)",
-        "states": {
-            "warning": 85,
-            "critical": 90,
-        },
-    },
+    "interval": 600,
+    "format": "󰋊",
+    "path": "/",
+    "on-click": "baobab &",
+    "format-alt-click": "click-right", 
+    "format-alt": "󰋊 {percentage_used}%",
+    "tooltip": true,
+    "tooltip-format": "HDD - {used} used out of {total} on {path} ({percentage_used}%)",
+    "states": {
+        "warning": 85,
+        "critical": 90
+    }
+},
 
     "temperature": {
         "hwmon-path":"/sys/class/hwmon/hwmon3/temp1_input",
         "thermal-zone": 0,
         "format": "",
         "format-alt-click": "click-right",
-        "format-alt": " {temperatureC}°F",
+        "format-alt": " {temperatureC}°C",
         "critical-threshold": 70,
-        "format-critical": " {temperatureC}°F",
+        "format-critical": " {temperatureC}°C",
     },
 
 
