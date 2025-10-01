@@ -1,137 +1,234 @@
 {
-    "layer": "top",
-    "position": "top",
-    "mod": "dock",
-    "exclusive": true,
-    "passthrough": false,
-    "gtk-layer-shell": true,
-    "height": 48,
-    "margin": 0,
-    "modules-left": [
-        "custom/rofi",
-        "custom/updates",
-        "custom/weather",
-        "custom/khorshididate",
-        "clock",
-        "wlr/taskbar",
+  "layer": "top",
+  "position": "top",
+  "mod": "dock",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "height": 48,
+  "margin": 0,
+  "modules-left": [
+    "custom/rofi",
+    "custom/weather",
+    "custom/khorshididate",
+    "clock",
+    "wlr/taskbar",
+  ],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "tray",
+    "custom/swaync",
+    "pulseaudio",
+    "pulseaudio#microphone",
+    "cpu",
+    "memory",
+    "disk",
+    "temperature",
+    "custom/updates",
+    "network",
+    "battery",
+    "hyprland/language",
+    "custom/lock_jcreen",
+    "custom/power",
+  ],
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-charging": "⚡ {capacity}%",
+    "format-plugged": "🛇 {capacity}%",
+    "format-full": "Full {icon}",
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ], // Requires a powerline/icon font like Font Awesome
+    "tooltip": true,
+  },
+  "custom/rofi": {
+    "format": "",
+    "on-click": "rofi -show drun",
+    "tooltip": false,
+  },
+  "custom/power": {
+    "format": "",
+    "on-click": "~/.config/waybar/scripts/power-menu",
+    "tooltip": "Power Menu",
+  },
+  "custom/swaync": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "🔔",
+      "none": "",
+      "dnd-notification": "🔕",
+      "dnd-none": "🔕",
+      "inhibited-notification": "🔔",
+      "inhibited-none": "🔕",
+      "dnd-inhibited-notification": "🔕",
+      "dnd-inhibited-none": "🔕",
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true,
+  },
+  "custom/lock_screen": {
+    "format": "",
+    "on-click": "hyprlock",
+    "tooltip": false,
+  },
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "disable-scroll": true,
+    "all-outputs": true,
+    "show-special": true,
+    "persistent-workspaces": {
+      "*": [
+        1,
+        2,
+        3,
+        4
+      ],
+    },
+  },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 20,
+    "all-outputs": true,
+    "tooltip-format": "{name}: {title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [
+      "rofi"
     ],
-
-    "modules-center": [
-        "hyprland/workspaces",
-    ],
-
-    "modules-right": [
-        "tray",
-        "custom/swaync",
-        "pulseaudio",
-        "pulseaudio#microphone",
-        "cpu",
-        "memory",
-        "disk",
-        "temperature",
-        "network",
-        "hyprland/language",
-        "custom/lock_screen",
-        "custom/power"
-    ],
-
-    "custom/rofi": {
-        "format": "󰀻",
-        "on-click": "rofi -show drun",
-        "tooltip": false
-    },
-
-    "custom/power": {
-        "format": "",
-        "on-click": "~/.config/waybar/scripts/power-menu",
-        "tooltip": "Power Menu"
-    },
-    "custom/swaync": {
-        "tooltip": false,
-        "format": "{icon}",
-        "format-icons": {
-            "notification": "🔔",
-            "none": "",
-            "dnd-notification": "🔕",
-            "dnd-none": "🔕",
-            "inhibited-notification": "🔔",
-            "inhibited-none": "🔕",
-            "dnd-inhibited-notification": "🔕",
-            "dnd-inhibited-none": "🔕"
-        },
-        "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
-    },
-
-    "custom/lock_screen": {
-        "format": "",
-        "on-click": "hyprlock",
-        "tooltip": false
-    },
-
-    "hyprland/workspaces": {
-        "on-click": "activate",
-        "disable-scroll": true,
-        "all-outputs": true,
-        "show-special": true,
-        "persistent-workspaces": {
-            "*": [ 1, 2, 3, 4 ],
-        },
-    },
-
-    "wlr/taskbar": {
-        "format": "{icon}",
-        "icon-size": 20,
-        "all-outputs": true,
-        "tooltip-format": "{name}: {title}",
-        "on-click": "activate",
-        "on-click-middle": "close",
-        "ignore-list": [
-            "rofi"
-         ]
-    },
-
-    "tray": {
-        "icon-size": 20,
-        "spacing": 10
-    },
-
-    "cpu": {
-        "interval": 10,
-        "format": "",
-        "max-length": 10,
-        "format-alt-click": "click-right",
-        "format-alt": " {usage}%",
-        "on-click":"ghostty -e btop"
-    },
-
-    "memory": {
-        "interval": 30,
-        "format": "",
-        "format-alt-click": "click-right",
-        "format-alt": " {}%",
-        "max-length": 10,
-        "tooltip": true,
-        "tooltip-format": "Memory - {used:0.1f}GB used",
-        "on-click":"ghostty -e btop"
-    },
-    
-    "disk": {
+  },
+  "tray": {
+    "icon-size": 20,
+    "spacing": 10,
+  },
+  "cpu": {
+    "interval": 10,
+    "format": "",
+    "max-length": 10,
+    "format-alt-click": "click-right",
+    "format-alt": " {usage}%",
+    "on-click": "ghostty -e btop",
+  },
+  "memory": {
+    "interval": 30,
+    "format": "",
+    "format-alt-click": "click-right",
+    "format-alt": " {}%",
+    "max-length": 10,
+    "tooltip": true,
+    "tooltip-format": "Memory - {used:0.1f}GB used",
+    "on-click": "ghostty -e btop",
+  },
+  "disk": {
     "interval": 600,
     "format": "󰋊",
     "path": "/",
-    "on-click": "baobab &",
-    "format-alt-click": "click-right", 
+    "format-alt-click": "click-right",
     "format-alt": "󰋊 {percentage_used}%",
     "tooltip": true,
     "tooltip-format": "HDD - {used} used out of {total} on {path} ({percentage_used}%)",
     "states": {
-        "warning": 85,
-        "critical": 90
+      "warning": 85,
+      "critical": 90,
+    },
+  },
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+    "thermal-zone": 0,
+    "format": "",
+    "format-alt-click": "click-right",
+    "format-alt": " {temperatureC}°F",
+    "critical-threshold": 70,
+    "format-critical": " {temperatureC}°F",
+  },
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-muted": "",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-",
+    "scroll-step": 5,
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ],
+    },
+    "tooltip": true,
+    "tooltip-format": "{icon} at {volume}%",
+    "on-click-right": "pavucontrol",
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": "",
+    "format-source-muted": "",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%+",
+    "on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%-",
+    "scroll-step": 5,
+    "tooltip": true,
+    "tooltip-format": " at {volume}%",
+  },
+  "custom/weather": {
+    //shows the current weather and forecast
+    "tooltip": true,
+    "format": "{}",
+    "interval": 3600,
+    "exec": "~/.config/waybar/scripts/wttr.py",
+    "return-type": "json",
+  },
+  "custom/updates": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/update-sys",
+    "on-click": "~/.config/waybar/scripts/update-sys update",
+    "interval": 3600,
+    "tooltip": true,
+    "signal": 8,
+    "return-type": "json",
+  },
+  "memory": {
+    "interval": 30,
+    "format": "",
+    "format-alt-click": "click-right",
+    "format-alt": " {}%",
+    "max-length": 10,
+    "tooltip": true,
+    "tooltip-format": "Memory - {used:0.1f}GB used",
+    "on-click": "ghostty -e btop"
+  },
+  "disk": {
+    "interval": 600,
+    "format": "󰋊",
+    "path": "/",
+    "on-click": "baobab &",
+    "format-alt-click": "click-right",
+    "format-alt": "󰋊 {percentage_used}%",
+    "tooltip": true,
+    "tooltip-format": "HDD - {used} used out of {total} on {path} ({percentage_used}%)",
+    "states": {
+      "warning": 85,
+      "critical": 90
     }
 },
 
