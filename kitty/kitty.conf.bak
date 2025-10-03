@@ -1,4 +1,126 @@
-font_family      JetBrains Mono
+# --------------------------------------------------------------------------- #
+# Font Configuration
+# --------------------------------------------------------------------------- #
+# Your chosen font family.
+font_family      Fira code
 bold_font        auto
 italic_font      auto
+bold_italic_font auto
 font_size        12.0
+
+# Adjust line height to add more vertical spacing between lines.
+# Can be a number in pixels (e.g., 2) or a percentage (e.g., 120%).
+modify_font cell_height 125%
+# Programming ligatures. Fira Code uses 'calt' and 'liga'.
+# You can find the correct features for your font in its documentation.
+font_features FiraCode-Retina +calt +liga
+
+# Disabling ligatures.
+# 'never' (default): Ligatures are always enabled.
+# 'cursor': Disables ligatures only under the text cursor to see the original characters.
+# 'always': Disables all ligatures.
+disable_ligatures cursor
+
+
+# --------------------------------------------------------------------------- #
+# Cursor Customization
+# --------------------------------------------------------------------------- #
+# The shape of the cursor. Can be 'block', 'beam', or 'underline'.
+cursor_shape block
+
+# Stop the cursor from blinking after 10 seconds of inactivity.
+# Set to 0 to blink forever.
+cursor_stop_blinking_after 10.0
+
+# --------------------------------------------------------------------------- #
+# Window Layout & Padding
+# --------------------------------------------------------------------------- #
+# Remember the size of the last used window.
+remember_window_size  no
+initial_window_width  960
+initial_window_height 640
+
+# Padding around the inside of the window.
+window_padding_width 0
+
+# Background opacity
+background_opacity 0.9
+
+# --------------------------------------------------------------------------- #
+# Tab Bar
+# --------------------------------------------------------------------------- #
+# Where to draw the tab bar. Can be 'top' or 'bottom'.
+tab_bar_edge bottom
+
+# The visual style of the tab bar. 'powerline' is a popular, modern choice.
+# Other options: 'fade', 'separator', 'slanted', 'hidden'.
+tab_bar_style powerline
+tab_powerline_style slanted
+
+# The format for the tab titles.
+# {title} is the current foreground process. {index} is the tab number.
+tab_title_template "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{index}: {title}"
+
+# --------------------------------------------------------------------------- #
+# Color Scheme
+# --------------------------------------------------------------------------- #
+# Include your theme file. This is correctly set up by the kitten.
+# BEGIN_KITTY_THEME
+# Rosé Pine
+include current-theme.conf
+# END_KITTY_THEME
+cursor_trail 5
+cursor_trail_decay 0.1 0.4
+cursor_trail_color #cba6f7
+
+# --------------------------------------------------------------------------- #
+# Terminal Bell
+# --------------------------------------------------------------------------- #
+# Disable the audible bell and use a visual one instead.
+ enable_audio_bell yes
+ bell_path /usr/share/sounds/freedesktop/stereo/bell.oga
+
+# --------------------------------------------------------------------------- #
+# Scrollback
+# --------------------------------------------------------------------------- #
+# Number of lines to keep in the scrollback buffer.
+scrollback_lines 4000
+
+# Program to use for viewing scrollback buffer in a new window (e.g., less).
+# Requires 'show_last_command_output' keybinding to be mapped.
+scrollback_pager less +G -R
+
+# --------------------------------------------------------------------------- #
+# Mouse & Selection
+# --------------------------------------------------------------------------- #
+# Automatically copy selected text to the clipboard.
+copy_on_select yes
+
+# Open URLs with the default browser when clicked.
+open_url_with default
+
+# The visual style of underlined URLs. Can be 'straight', 'double', 'curly'.
+url_style curly
+
+# --------------------------------------------------------------------------- #
+# Performance
+# --------------------------------------------------------------------------- #
+# Helps prevent screen tearing and keeps scrolling smooth.
+sync_to_monitor yes
+
+# --------------------------------------------------------------------------- #
+# Keyboard Shortcuts
+# --------------------------------------------------------------------------- #
+# Use standard Ctrl+Shift+C for copy and Ctrl+Shift+V for paste.
+map ctrl+shift+c copy_to_clipboard
+map ctrl+shift+v paste_from_clipboard
+# Increase/decrease font size.
+map ctrl+equal    change_font_size all +1.0
+map ctrl+minus    change_font_size all -1.0
+map ctrl+backspace change_font_size all 0
+
+# Clear the terminal screen and scrollback buffer.
+map ctrl+shift+k clear_terminal scrollback active
+
+# Browse the scrollback buffer in 'less'.
+map ctrl+shift+h show_last_command_output
