@@ -1,29 +1,97 @@
 #!/usr/bin/env bash
-# System update script using pacman
-# If the operating system is not Arch Linux, exit the script successfully
-if [ ! -f /etc/arch-release ]; then
-    exit 0
-fi
+#
+# Waybar custom module for Arch Linux updates with cache and file locking
 
-# Calculate updates using pacman only
-OFFICIAL=$(checkupdates 2>/dev/null | wc -l)
-ALL=$(pacman -Q | wc -l)
+# Cache and lock file locations
+CACHE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/waybar-updates"
+LOCK_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/waybar-updates.lock"
+CACHE_MAX_AGE=3600  # 1 hour in seconds
 
-# Case/switch for each service updates
-case $1 in
-    official) echo " $OFFICIAL";;
-esac
+# Exit gracefully if not running Arch Linux
+[[ -f /etc/arch-release ]] || exit 0
 
-# If the parameter is "update", update using pacman
-if [ "$1" = "update" ]; then
-    ghostty sudo pacman -Syu; pkill -SIGRTMIN+8 waybar
-fi
-
-# If there aren't any parameters, return the number of updates
-if [ "$1" = "" ]; then
-    if [[ "$OFFICIAL" = "0" ]]; then
-        printf '{"text": "", "tooltip": "System up to date (%s packages installed)"}\n' "$ALL"
-    else
-        printf '{"text": " %s", "tooltip": "%s updates available (%s total packages)"}\n' "$OFFICIAL" "$OFFICIAL" "$ALL"
+# Check if cache is valid
+is_cache_valid() {
+    if [[ ! -f "$CACHE_FILE" ]]; then
+        return 1
     fi
-fi
+    
+    local cache_age=$(( $(date +%s) - $(stat -c %Y "$CACHE_FILE" 2>/dev/null || echo 0) ))
+    [[ $cache_age -lt $CACHE_MAX_AGE ]]
+}
+
+# Update cache with file locking
+update_cache() {
+    # Try to acquire lock (non-blocking)
+    exec 200>"$LOCK_FILE"
+    if ! flock -n 200; then
+        # Another instance is updating, wait for it to finish
+        flock 200
+        # Lock acquired, cache should be updated now
+        exec 200>&-
+        return 0
+    fi
+    
+    # We have the lock, update the cache
+    local updates total
+    updates=$(/usr/bin/checkupdates 2>/dev/null | /usr/bin/wc -l || echo "0")
+    total=$(/usr/bin/pacman -Q 2>/dev/null | /usr/bin/wc -l || echo "0")
+    
+    echo "$updates $total" > "$CACHE_FILE"
+    
+    # Release lock
+    exec 200>&-
+}
+
+# Get cached data
+get_cached_data() {
+    if is_cache_valid; then
+        cat "$CACHE_FILE"
+    else
+        update_cache
+        cat "$CACHE_FILE"
+    fi
+}
+
+# Perform system update
+perform_update() {
+    kitty -e sudo /usr/bin/pacman -Syu && {
+        update_cache
+        /usr/bin/pkill -SIGRTMIN+8 waybar
+    }
+}
+
+# Output JSON for waybar
+output_json() {
+    local updates=$1
+    local total=$2
+    
+    if [[ "$updates" -eq 0 ]]; then
+        printf '{"text": "", "tooltip": "System up to date (%s packages installed)"}\n' "$total"
+    else
+        printf '{"text": "%s", "tooltip": "%s updates available (%s total packages)"}\n' \
+            "$updates" "$updates" "$total"
+    fi
+}
+
+# Main logic
+main() {
+    case "${1:-}" in
+        official)
+            read -r updates total <<< "$(get_cached_data)"
+            echo " $updates"
+            ;;
+        update)
+            perform_update
+            ;;
+        refresh)
+            update_cache
+            ;;
+        *)
+            read -r updates total <<< "$(get_cached_data)"
+            output_json "$updates" "$total"
+            ;;
+    esac
+}
+
+main "$@"

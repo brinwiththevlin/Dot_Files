@@ -9,6 +9,7 @@
     "margin": 0,
     "modules-left": [
         "custom/rofi",
+        "custom/updates",
         "custom/weather",
         "custom/khorshididate",
         "clock",
@@ -28,7 +29,6 @@
         "memory",
         "disk",
         "temperature",
-        "custom/updates",
         "network",
         "hyprland/language",
         "custom/lock_screen",
@@ -36,7 +36,7 @@
     ],
 
     "custom/rofi": {
-        "format": "",
+        "format": "󰀻",
         "on-click": "rofi -show drun",
         "tooltip": false
     },
@@ -187,13 +187,13 @@
         "format" : "{}",
         "interval" : 3600,
         "exec" : "~/.config/waybar/scripts/wttr.py",
-        "return-type" : "json"
+        "return-type" : "json",
     },
 
     "custom/updates": {
         "format": "{}",
-        "exec": "~/.config/waybar/scripts/update-sys",
-        "on-click": "~/.config/waybar/scripts/update-sys update",
+        "exec": "/home/ghostvox/.config/waybar/scripts/update-sys",
+        "on-click": "/home/ghostvox/.config/waybar/scripts/update-sys update",
         "interval": 3600,
         "tooltip": true,
         "signal": 8,
@@ -236,6 +236,6 @@
         "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next",
         "format-en": "EN",
         "format-fa": "FA"
-   },
+   }
 
 }

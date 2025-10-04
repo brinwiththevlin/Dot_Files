@@ -6,6 +6,6 @@ configuration {
   display-drun: "  ";
   display-window: "﩯 ";
   display-combi: "  ";
-  modi: "drun,window,calc,nerdy";
+  modi: "drun,window,nerdy";
 }
 @theme "themes/ghostvox.rasi"

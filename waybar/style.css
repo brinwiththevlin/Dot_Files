@@ -21,6 +21,7 @@
 @define-color pink    #89b4fa;
 @define-color cyan-grey rgba(137, 180, 250, 0);
 @define-color border_color rgba(203, 166, 247, 1);
+@define-color background transparent; 
 
 /*
   Colors (dracula) 
@@ -75,11 +76,13 @@
     font-weight: bold;
     font-size: 16px;
     min-height: 0;
+    color: @foreground;
 }
 .modules-right > *, .modules-left > *, .modules-center > * {
     margin: 0px 10px;
     font-size: 16px;
 }
+
 window#waybar {
     background: rgba(30, 30, 30, 0.3);
 	  color: @foreground;
@@ -93,7 +96,7 @@ window#waybar {
     
 }
 #workspaces >*{
-
+    margin: 0px 3px;
 }
 
 #workspaces button, #workspaces button.persistent {
@@ -169,6 +172,7 @@ tooltip label{
 #network,
 #tray,
 #temperature,
+#updates,
 #backlight,
 #language {
     background: @background;
@@ -195,8 +199,10 @@ tooltip label{
 #tray > *:hover,
 #temperature:hover,
 #backlight:hover,
-#language:hover {
+#language:hover ,
+#updates:hover {
     background: @background;
+    color: @border_color;
     opacity: 1;
     padding: 0px 10px;
     margin: 2px 3px 2px 3px;
@@ -224,6 +230,15 @@ tooltip label{
 #custom-rofi {
     color: @arch_blue;
     border-radius: 5px 0px 0px 5px;
+}
+#cusotm-rofi:hover{
+   color : @border_color;
+
+}
+#custom-updates {
+    color: @arch_blue;
+    border-radius: 5px 0px 0px 5px;
+    animation: blink 1s step-end   ;
 }
 
 #custom-power {
