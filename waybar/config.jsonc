@@ -30,11 +30,29 @@
         "disk",
         "temperature",
         "network",
+        // "battery",
         "hyprland/language",
         "custom/lock_screen",
         "custom/power"
     ],
-
+  // "battery": {
+  //   "format": "{icon} {capacity}%",
+  //   "format-charging": "⚡ {capacity}%",
+  //   "format-plugged": "🛇 {capacity}%",
+  //   "format-full": "Full {icon}",
+  //   "states": {
+  //     "warning": 30,
+  //     "critical": 15,
+  //   },
+  //   "format-icons": [
+  //     "",
+  //     "",
+  //     "",
+  //     "",
+  //     ""
+  //   ], // Requires a powerline/icon font like Font Awesome
+  //   "tooltip": true,
+  // },
     "custom/rofi": {
         "format": "󰀻",
         "on-click": "rofi -show drun",

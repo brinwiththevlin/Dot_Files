@@ -1,9 +1,7 @@
 # 🚀 Hyprland Dotfiles
-
 A comprehensive Hyprland configuration featuring Catppuccin Mocha theme, custom Waybar, Rofi menus, and optimized development workflows.
 
 ## 📸 Features
-
 - **Window Manager**: Hyprland with smooth animations and custom workspace rules
 - **Status Bar**: Waybar with custom modules (weather, updates, system stats, calendar integration)
 - **Application Launcher**: Rofi with multiple custom menus (apps, emoji, wallpaper picker, power menu)
@@ -21,7 +19,6 @@ A comprehensive Hyprland configuration featuring Catppuccin Mocha theme, custom 
 ### Required Packages
 
 #### Core System (Arch Linux)
-
 ```bash
 # Base packages
 sudo pacman -S hyprland waybar rofi mako kitty wlogout grim slurp \
@@ -40,6 +37,9 @@ sudo pacman -S rustup go nodejs npm aws-cli docker git
 sudo pacman -S hyprpaper hyprlock hypridle brightnessctl playerctl \
                cliphist imagemagick btop baobab qalculate-gtk gnome-calendar
 
+# Waybar dependencies
+sudo pacman -S pacman-contrib  # Provides checkupdates for Waybar updates module
+
 # Security
 sudo pacman -S ufw
 
@@ -48,7 +48,6 @@ sudo pacman -S ttf-jetbrains-mono-nerd ttf-fira-code noto-fonts
 ```
 
 #### AUR Packages
-
 ```bash
 yay -S zed swaync hyprshot wf-recorder satty ghostty-bin
 ```
@@ -56,7 +55,6 @@ yay -S zed swaync hyprshot wf-recorder satty ghostty-bin
 **Note**: Ghostty is the default terminal in the Hyprland config. If unavailable, the config will fall back to Kitty.
 
 #### Hyprland Plugins
-
 ```bash
 # Install hyprpm if not already installed
 hyprpm update
@@ -67,14 +65,12 @@ hyprpm enable hyprmodoro
 ```
 
 ### Optional Dependencies
-
 - **Font**: JetBrains Mono Nerd Font, Fira Code (for terminal and UI)
 - **Weather API**: Get a free API key from [WeatherAPI.com](https://www.weatherapi.com/)
 
 ## 🔧 Installation
 
 ### 0. Backup Existing Configurations (Important!)
-
 ```bash
 # Backup existing configs if they exist
 [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.backup
@@ -85,14 +81,12 @@ hyprpm enable hyprmodoro
 ```
 
 ### 1. Clone the Repository
-
 ```bash
 # Clone to the specified location
 git clone https://github.com/yourusername/dotfiles ~/.config/Dot_files
 ```
 
 ### 2. Create Symbolic Links
-
 You need to create symbolic links from `~/.config/Dot_files` to `~/.config` for each configuration folder:
 
 ```bash
@@ -113,7 +107,6 @@ ln -sf ~/Dot_files/starship.toml ~/.config/starship.toml
 ```
 
 ### 3. Set Up Weather API (Optional)
-
 Create a `.env` file in the waybar directory:
 
 ```bash
@@ -123,8 +116,37 @@ echo 'WEATHER_API_KEY=your_api_key_here' > .env
 
 Get your free API key from [WeatherAPI.com](https://www.weatherapi.com/)
 
-### 4. Install Rust, Go, and Node.js
+### 4. Configure Waybar Updates Module
+The Waybar updates module requires `pacman-contrib` for the `checkupdates` command. Make sure it's installed:
 
+```bash
+sudo pacman -S pacman-contrib
+```
+
+The updates module script is located at `~/.config/waybar/scripts/updates.sh` and provides:
+- **Cached updates**: Checks for updates hourly to reduce system load
+- **File locking**: Prevents multiple simultaneous update checks
+- **Click actions**: Click the updates indicator to open a terminal and run system updates
+
+**Terminal Customization**: By default, updates are performed in Kitty. To use a different terminal, edit `~/.config/waybar/scripts/updates.sh` line 46:
+
+```bash
+# Change from:
+kitty -e sudo /usr/bin/pacman -Syu
+
+# To your preferred terminal, e.g.:
+alacritty -e sudo /usr/bin/pacman -Syu
+# or
+foot -e sudo /usr/bin/pacman -Syu
+```
+
+The module automatically:
+- Displays the number of available updates
+- Shows total installed packages in the tooltip
+- Refreshes on demand when clicked
+- Updates Waybar after performing system updates
+
+### 5. Install Rust, Go, and Node.js
 The `.zshrc` automatically configures PATH for these tools:
 
 ```bash
@@ -139,15 +161,12 @@ npm config set prefix '~/.npm-global'
 ```
 
 **Optional Tools** (used by .zshrc if available):
-
 - **ASDF** version manager - for managing multiple runtime versions
 - **Zoxide** - better cd command (already in pacman list above)
 - **FZF** - fuzzy finder (already in pacman list above)
 
-### 5. Configure Shell
-
+### 6. Configure Shell
 The `.zshrc` from the dotfiles includes:
-
 - **Oh My Zsh** with plugins (git, rust, golang, docker)
 - **Starship** prompt (custom config)
 - **PATH** exports for Rust, Go, and Node.js
@@ -168,7 +187,6 @@ export STARSHIP_CONFIG="$HOME/.config/Dot_files/starship.toml"
 ```
 
 The `.zshrc` also sets up:
-
 - **Zed editor** alias: `zed` → `zeditor`
 - **Default editor**: `$EDITOR` = `zeditor`
 
@@ -178,8 +196,7 @@ If you have an existing `.zshrc`, back it up first:
 mv ~/.zshrc ~/.zshrc.backup
 ```
 
-### 6. Create Required Directories
-
+### 7. Create Required Directories
 ```bash
 # Create wallpapers directory
 mkdir -p ~/Pictures/wallpapers
@@ -190,8 +207,12 @@ mkdir -p ~/Pictures/Screenshots
 # Create screencasts directory for video recordings
 mkdir -p ~/Videos/Screencasts
 
+# Create cache directory for Waybar (updates module)
+mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}"
+
 # Place your wallpapers in ~/Pictures/wallpapers
 # The wallpaper picker (Super + W) will use this directory
+
 # Screenshots will be saved to ~/Pictures/Screenshots automatically
 # Screen recordings will be saved to ~/Videos/Screencasts
 ```
@@ -199,7 +220,6 @@ mkdir -p ~/Videos/Screencasts
 ## ⌨️ Key Bindings
 
 ### General
-
 | Keybinding | Action |
 |------------|--------|
 | `Super + T` | Open terminal (Ghostty) |
@@ -212,7 +232,6 @@ mkdir -p ~/Videos/Screencasts
 | `Super + B` | Open browser |
 
 ### Window Navigation
-
 | Keybinding | Action |
 |------------|--------|
 | `Super + H/J/K/L` | Move focus (Vim-style) |
@@ -221,7 +240,6 @@ mkdir -p ~/Videos/Screencasts
 | `Alt + J/K` | Move lines up/down |
 
 ### Rofi Menus
-
 | Keybinding | Action |
 |------------|--------|
 | `Super + Backspace` | App launcher |
@@ -232,7 +250,6 @@ mkdir -p ~/Videos/Screencasts
 | `Ctrl + Delete` | Power menu |
 
 ### Screenshots & Recording
-
 | Keybinding | Action |
 |------------|--------|
 | `Ctrl + Shift + 3` | Screenshot window |
@@ -240,26 +257,23 @@ mkdir -p ~/Videos/Screencasts
 | `Ctrl + Shift + 5` | Toggle screen recording |
 
 ### Pomodoro Timer
-
 | Keybinding | Action |
 |------------|--------|
 | `Super + A` | Start timer |
 | `Super + Shift + A` | Stop timer |
 
 ### Notifications
-
 | Keybinding | Action |
 |------------|--------|
 | `Super + N` | Toggle notification center |
 
 ### Utilities
-
 | Keybinding | Action |
 |------------|--------|
 | Click date in Waybar | Open GNOME Calendar |
+| Click updates in Waybar | Run system update |
 
 ## 📁 Structure
-
 ```
 Dot_files/
 ├── hypr/              # Hyprland configuration
@@ -267,7 +281,11 @@ Dot_files/
 │   └── config/        # Split configs
 ├── waybar/            # Status bar
 │   ├── .env           # Weather API key (create this)
+│   ├── config.jsonc   # Waybar configuration
+│   ├── style.css      # Waybar styling
 │   └── scripts/       # Custom scripts
+│       ├── updates.sh # System updates module
+│       └── wttr.py    # Weather module
 ├── rofi/              # Application launcher & menus
 ├── kitty/             # Kitty terminal
 ├── swaync/            # Notification daemon
@@ -280,9 +298,7 @@ Dot_files/
 ## 🎨 Customization
 
 ### Changing Theme Colors
-
 The Catppuccin Mocha theme is defined in:
-
 - `rofi/colors/ghostvox.rasi`
 - `waybar/style.css`
 - `kitty/current-theme.conf`
@@ -290,15 +306,38 @@ The Catppuccin Mocha theme is defined in:
 - `hypr/mocha.conf`
 
 ### Modifying Waybar Modules
-
 Edit `waybar/config.jsonc` to add/remove modules. Custom scripts are in `waybar/scripts/`
 
-### Adding Custom Rofi Menus
+#### Waybar Updates Module
+The updates module (`waybar/scripts/updates.sh`) supports several options:
 
+**Configuration in `waybar/config.jsonc`:**
+```jsonc
+"custom/updates": {
+    "exec": "~/.config/waybar/scripts/updates.sh",
+    "return-type": "json",
+    "interval": 3600,  // Check every hour
+    "on-click": "~/.config/waybar/scripts/updates.sh update",
+    "on-click-right": "~/.config/waybar/scripts/updates.sh refresh"
+}
+```
+
+**Script options:**
+- `./updates.sh` - Output JSON for Waybar (default)
+- `./updates.sh official` - Display simple text format
+- `./updates.sh update` - Perform system update in terminal
+- `./updates.sh refresh` - Force cache refresh
+
+**Customizing cache duration:**
+Edit line 8 in `updates.sh`:
+```bash
+CACHE_MAX_AGE=3600  # Change to desired seconds (e.g., 7200 for 2 hours)
+```
+
+### Adding Custom Rofi Menus
 Create new menu configs in `rofi/` following the existing pattern in `launchers/` or `powermenu/`
 
 ## 🔍 Monitor Configuration
-
 Edit `hypr/config/monitors.conf` to match your setup:
 
 ```conf
@@ -309,29 +348,31 @@ monitor = HDMI-A-2,3840x2160@120,2560x0,1.5
 ## 🐛 Troubleshooting
 
 ### Starship prompt not showing correctly
-
 - Check the path in `.zshrc` - should point to `~/.config/Dot_files/starship.toml`
 - Verify starship is installed: `which starship`
 - Reload shell: `source ~/.zshrc`
 
 ### Waybar not showing weather
-
 - Ensure you have a valid API key in `~/.config/waybar/.env`
 - Check internet connection
 - Run `~/.config/waybar/scripts/wttr.py` manually to debug
 
-### Hyprland not starting
+### Waybar updates module not working
+- Ensure `pacman-contrib` is installed: `sudo pacman -S pacman-contrib`
+- Check if `checkupdates` command works: `checkupdates`
+- Make the script executable: `chmod +x ~/.config/waybar/scripts/updates.sh`
+- Test the script manually: `~/.config/waybar/scripts/updates.sh`
+- Check cache permissions: `ls -la ~/.cache/waybar-updates*`
 
+### Hyprland not starting
 - Check logs: `cat /tmp/hypr/$(ls -t /tmp/hypr/ | head -n 1)/hyprland.log`
 - Ensure all required packages are installed
 
 ### Rofi menus not working
-
 - Make scripts executable: `chmod +x ~/.config/rofi/**/*.sh`
 - Check if rofi is installed: `which rofi`
 
 ## 📝 Credits
-
 - **Hyprland**: [hyprland.org](https://hyprland.org)
 - **Catppuccin Theme**: [catppuccin.com](https://catppuccin.com)
 - **Rofi Themes**: Based on adi1090x's collection
@@ -339,13 +380,10 @@ monitor = HDMI-A-2,3840x2160@120,2560x0,1.5
 - **Icons**: Nerd Fonts
 
 ## 📄 License
-
 This configuration is free to use and modify. Attribution appreciated but not required.
 
 ## 🤝 Contributing
-
 Feel free to submit issues or pull requests for improvements!
 
 ---
-
 **Note**: This configuration is optimized for Arch Linux. Adjustments may be needed for other distributions.
