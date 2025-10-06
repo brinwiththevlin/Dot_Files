@@ -2,7 +2,7 @@
 # Enviroment Variables
 # -------------------------------------------------------------------------- #
 alias zed='zeditor'
-export HYPRSHOT_DIR="/home/ghostvox/Pictures/Screenshots/"
+export HYPRSHOT_DIR="$HOME/Pictures/Screenshots/"
 
 
 

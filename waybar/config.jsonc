@@ -192,8 +192,8 @@
 
     "custom/updates": {
         "format": "{}",
-        "exec": "/home/ghostvox/.config/waybar/scripts/update-sys",
-        "on-click": "/home/ghostvox/.config/waybar/scripts/update-sys update",
+        "exec": "$HOME/.config/waybar/scripts/update-sys",
+        "on-click": "$HOME/.config/waybar/scripts/update-sys update",
         "interval": 3600,
         "tooltip": true,
         "signal": 8,
