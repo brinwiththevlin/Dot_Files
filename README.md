@@ -14,6 +14,9 @@ A comprehensive Hyprland configuration featuring Catppuccin Mocha theme, custom 
 - **Editor Config**: IdeaVim configuration for IntelliJ-based IDEs
 - **Utilities**: Qalculate (calculator), GNOME Calendar, clipboard manager (cliphist)
 
+## Demo
+<video src="./demo.mp4" width="320" height="240" controls></video>
+
 ## 📋 Prerequisites
 
 ### Required Packages
