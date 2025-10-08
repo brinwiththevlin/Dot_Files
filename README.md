@@ -16,7 +16,7 @@ A comprehensive Hyprland configuration featuring Catppuccin Mocha theme, custom 
 
 ## Demo
 
-![Demo](demo.mp4)[![Watch the demo](https://img.youtube.com/vi/I52polarkx0/0.jpg)](https://www.youtube.com/watch?v=I52polarkx0)
+[![Watch the demo](https://img.youtube.com/vi/I52polarkx0/0.jpg)](https://www.youtube.com/watch?v=I52polarkx0)
 
 ## 📋 Prerequisites
 
