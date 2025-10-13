@@ -124,7 +124,7 @@
         "max-length": 10,
         "format-alt-click": "click-right",
         "format-alt": " {usage}%",
-        "on-click":"ghostty -e btop"
+        "on-click":"kitty -e btop"
     },
 
     "memory": {
@@ -135,7 +135,7 @@
         "max-length": 10,
         "tooltip": true,
         "tooltip-format": "Memory - {used:0.1f}GB used",
-        "on-click":"ghostty -e btop"
+        "on-click":"kitty -e btop"
     },
     
     "disk": {

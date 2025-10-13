@@ -11,7 +11,7 @@ export HYPRSHOT_DIR="$HOME/Pictures/Screenshots/"
 # --------------------------------------------------------------------------- #
 
 # Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="/usr/share/oh-my-zsh"
 
 # Set ZSH_THEME to blank to disable Oh My Zsh themes and prevent conflicts
 # with Starship. Starship will handle the prompt.
