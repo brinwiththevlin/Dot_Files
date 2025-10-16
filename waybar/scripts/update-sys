@@ -55,7 +55,7 @@ get_cached_data() {
 
 # Perform system update
 perform_update() {
-    kitty -e sudo /usr/bin/pacman -Syu && {
+    kitty --class 'pacman-update' -e sudo /usr/bin/pacman -Syu && {
         update_cache
         /usr/bin/pkill -SIGRTMIN+8 waybar
     }
