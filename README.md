@@ -51,6 +51,22 @@ sudo pacman -S ufw
 sudo pacman -S ttf-jetbrains-mono-nerd ttf-fira-code noto-fonts
 ```
 
+#### Application Flags
+discords application file should be in ~/.local/share/applications/discord.desktop. This makes
+discord render nice and crisp
+```bash
+[Desktop Entry]
+Name=Discord
+StartupWMClass=discord
+Comment=All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
+GenericName=Internet Messenger
+Exec=/usr/bin/discord --enable-font-antialiasing--enable-font-subpixel-positioning --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations
+Icon=discord
+Type=Application
+Categories=Network;InstantMessaging;
+Path=/usr/bin
+
+```
 #### AUR Packages
 ```bash
 yay -S zed swaync hyprshot wf-recorder satty ghostty-bin
