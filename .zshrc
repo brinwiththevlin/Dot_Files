@@ -98,3 +98,7 @@ fi
 # This MUST be the last thing to run to take control of the prompt.
 export STARSHIP_CONFIG="$HOME/.config/Dot_Files/starship.toml"
 source <(starship init zsh)
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+eval "$(pyenv virtualenv-init -)"
