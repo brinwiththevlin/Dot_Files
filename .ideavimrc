@@ -1,7 +1,7 @@
 " IntelliJ IdeaVim keybindings (add to ~/.ideavimrc)
 " Leader key is Space
 let mapleader = " "
-set clipboard=unnamed
+set clipboard=unnamedplus,unnamed,ideaput
 
 " Enable IdeaVim plugins
 set surround
@@ -12,12 +12,14 @@ set ReplaceWithRegister
 set which-key
 set highlightedyank
 
-set timeoutlen=5000
+set timeoutlen=10000
 
 " Configure highlighted yank
 let g:highlightedyank_highlight_duration = "200"
 let g:highlightedyank_highlight_color = "rgba(213, 108, 40, 100)"
 
+"======== Open File Explore =====
+nmap - :action ActivateProjectToolWindow<CR>
 
 
 " ===== LSP MAPPINGS =====
@@ -44,7 +46,7 @@ nmap <Space>D :action GotoTypeDeclaration<CR>
 nmap gD :action GotoDeclaration<CR>
 
 " Go to implementation
-nmap gI :action GotoImplementation<CR>
+nmap gi :action GotoImplementation<CR>
 
 " Go to references
 nmap gr :action ShowUsages<CR>
