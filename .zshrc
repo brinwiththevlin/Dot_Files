@@ -40,6 +40,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
 
+
 # Set preferred editor.
 export EDITOR='zeditor'
 
@@ -90,7 +91,7 @@ autoload -Uz compinit && compinit
 # Run fastfetch only in interactive shells, not in tmux or ssh sessions.
 if [[ -z "$FASTFETCH_RAN" && -z "$TMUX" && -z "$SSH_CLIENT" ]]; then
     export FASTFETCH_RAN=1
-    fastfetch --logo arch2
+    fastfetch --logo Xenia_old
 fi
 
 # --- Starship Prompt ---

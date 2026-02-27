@@ -1,52 +1,55 @@
 {
     "layer": "top",
-    "position": "top",
-    "mod": "dock",
-    "exclusive": true,
-    "passthrough": false,
-    "gtk-layer-shell": true,
-    "height": 48,
-    "margin": 0,
-    "modules-left": [
-        "custom/rofi",
-        "custom/updates",
-        "custom/weather",
-        "custom/khorshididate",
-        "clock",
-        "wlr/taskbar",
-    ],
+      "output": [
+                "Dell Inc. DELL S2725QC GZPG464", 
+            ],
+        "position": "top",
+        "mod": "dock",
+        "exclusive": true,
+        "passthrough": false,
+        "gtk-layer-shell": true,
+        "height": 48,
+        "margin": 0,
+        "modules-left": [
+            "custom/rofi",
+            "custom/updates",
+            "custom/weather",
+            "custom/khorshididate",
+            "clock",
+            "wlr/taskbar",
+        ],
 
-    "modules-center": [
-        "hyprland/workspaces",
-    ],
+        "modules-center": [
+            "hyprland/workspaces",
+        ],
 
-    "modules-right": [
-        "tray",
-        "custom/swaync",
-        "pulseaudio",
-        "pulseaudio#microphone",
-        "cpu",
-        "memory",
-        "disk",
-        "temperature",
-        "network",
-        // "battery",
-        "hyprland/language",
-        "custom/lock_screen",
-        "custom/power"
-    ],
-  // "battery": {
-  //   "format": "{icon} {capacity}%",
-  //   "format-charging": "⚡ {capacity}%",
-  //   "format-plugged": "🛇 {capacity}%",
-  //   "format-full": "Full {icon}",
-  //   "states": {
-  //     "warning": 30,
-  //     "critical": 15,
-  //   },
-  //   "format-icons": [
-  //     "",
-  //     "",
+        "modules-right": [
+            "tray",
+            "custom/swaync",
+            "pulseaudio",
+            "pulseaudio#microphone",
+            "cpu",
+            "memory",
+            "disk",
+            "temperature",
+            "network",
+            // "battery",
+            "hyprland/language",
+            "custom/lock_screen",
+            "custom/power"
+        ],
+      // "battery": {
+      //   "format": "{icon} {capacity}%",
+      //   "format-charging": "⚡ {capacity}%",
+      //   "format-plugged": "🛇 {capacity}%",
+      //   "format-full": "Full {icon}",
+      //   "states": {
+      //     "warning": 30,
+      //     "critical": 15,
+      //   },
+      //   "format-icons": [
+      //     "",
+      //     "",
   //     "",
   //     "",
   //     ""
@@ -232,7 +235,7 @@
 
     "clock": {
         "timezone": "America/New_York",
-        "format": " {:%H:%M}",
+        "format": " {:%I:%M %p}",
         "tooltip": true,
         "on-click": "setbg",
         "tooltip-format": " {:%A, %B %e %Y}"

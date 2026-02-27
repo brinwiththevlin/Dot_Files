@@ -1,20 +1,14 @@
 /* Colors (gruvbox) */
 
-@define-color black	#282828;
-@define-color red	#cc241d;
-@define-color green	#98971a;
-@define-color yellow	#d79921;
-@define-color blue	#458588;
+@define-color black	#282828; /*used for tooltip background and flashing of update package notification*/
+@define-color red	#cc241d; /*used for critical temperature and disk space warnings and power button*/
+@define-color yellow	#d79921; /* used for warning temperature and disk space warnings*/
 @define-color purple	#b16286;
-@define-color aqua	#689d6a;
 @define-color gray	#a89984;
 @define-color brgray	#928374;
 @define-color brred	#fb4934;
-@define-color brgreen	#b8bb26;
 @define-color bryellow	#fabd2f;
-@define-color brblue	#83a598;
 @define-color brpurple	#d3869b;
-@define-color braqua	#8ec07c;
 @define-color white	#ebdbb2;
 @define-color bg2	#504945;
 @define-color foreground	#ebdbb2;
@@ -31,18 +25,14 @@
  @define-color gray	#44475a; 
  @define-color black #21222c; 
  @define-color red	#ff5555; 
- @define-color green	#50fa7b; 
  @define-color yellow	#f1fa8c; 
  @define-color cyan	#8be9fd; 
- @define-color blue	#6272a4; 
  @define-color purple	#bd93f9; 
  @define-color pink	#ff79c6; 
  @define-color white #ffffff; 
  @define-color brred #ff6e6e; 
- @define-color brgreen #69ff94; 
  @define-color bryellow #ffffa5;
  @define-color brcyan #a4ffff; 
- @define-color brblue #6272a4; 
  @define-color brpurple #d6acff; 
  @define-color brpink #ff92df; 
 */
@@ -84,7 +74,7 @@
 }
 
 window#waybar {
-    background: rgba(30, 30, 30, 0.3);
+    background: rgba(30, 30, 30, 0.4);
 	  color: @foreground;
 }
 

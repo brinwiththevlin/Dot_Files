@@ -44,7 +44,7 @@ initial_window_height 640
 window_padding_width 0
 
 # Background opacity
-background_opacity 0.9
+background_opacity 1
 
 # --------------------------------------------------------------------------- #
 # Tab Bar
@@ -66,12 +66,12 @@ tab_title_template "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{index
 # --------------------------------------------------------------------------- #
 # Include your theme file. This is correctly set up by the kitten.
 # BEGIN_KITTY_THEME
-# Rosé Pine
+# Everforest Dark Hard
 include current-theme.conf
 # END_KITTY_THEME
 cursor_trail 5
 cursor_trail_decay 0.1 0.4
-cursor_trail_color #cba6f7
+# cursor_trail_color #cba6f7
 
 # --------------------------------------------------------------------------- #
 # Terminal Bell
@@ -118,6 +118,17 @@ map ctrl+shift+v paste_from_clipboard
 map ctrl+equal    change_font_size all +1.0
 map ctrl+minus    change_font_size all -1.0
 map ctrl+backspace change_font_size all 0
+
+# Map Ctrl + Number to switch to specific tabs (1-9).
+map ctrl+1 goto_tab 1
+map ctrl+2 goto_tab 2
+map ctrl+3 goto_tab 3
+map ctrl+4 goto_tab 4
+map ctrl+5 goto_tab 5
+map ctrl+6 goto_tab 6
+map ctrl+7 goto_tab 7
+map ctrl+8 goto_tab 8
+map ctrl+9 goto_tab 9
 
 # Clear the terminal screen and scrollback buffer.
 map ctrl+shift+k clear_terminal scrollback active

@@ -15,7 +15,7 @@ set highlightedyank
 set timeoutlen=10000
 
 " Configure highlighted yank
-let g:highlightedyank_highlight_duration = "200"
+let g:highlightedyank_highlight_duration = "700"
 let g:highlightedyank_highlight_color = "rgba(213, 108, 40, 100)"
 
 "======== Open File Explore =====
@@ -247,6 +247,8 @@ imap <C-E> <C-O>:action EditorEscape<CR>
 imap <C-N> <C-O>:action EditorDown<CR>
 imap <C-P> <C-O>:action EditorUp<CR>
 
+" Force open the list of methods
+imap <C-Space> <Action>(CodeCompletion)
 " Run configuration
 nmap <Space>r :action ChooseRunConfiguration<CR>
 
