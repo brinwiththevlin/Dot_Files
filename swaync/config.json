@@ -40,4 +40,9 @@
             "image-radius": 12
         }
     }
+    ,
+    "privacy": {
+        "hide-previews": false,
+        "placeholder-text": "Hidden while streaming"
+    }
 }

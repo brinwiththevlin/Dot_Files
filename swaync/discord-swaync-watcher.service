@@ -1,0 +1,12 @@
+[Unit]
+Description=Discord -> swaync privacy watcher
+After=pipewire.service
+
+[Service]
+Type=simple
+ExecStart=/home/brinhasavlin/.config/Dot_Files/swaync/discord_stream_watcher.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

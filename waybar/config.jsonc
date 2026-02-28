@@ -29,6 +29,7 @@
     "temperature",
     "network",
     "battery",
+    "power-profiles-daemon",
     "hyprland/language",
     "custom/lock_screen",
     "custom/power"
@@ -241,5 +242,15 @@
     "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next",
     "format-en": "EN",
     "format-fa": "FA"
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Profile: {profile}",
+    "tooltip": true,
+    "format-icons": {
+        "power-saver": "con", // Requires Nerd Fonts
+        "balanced": "bal",
+        "performance": "per"
+    }
   }
 }
