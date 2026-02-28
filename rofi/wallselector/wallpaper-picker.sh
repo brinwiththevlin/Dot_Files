@@ -2,7 +2,7 @@
 WALLPAPER_DIR="$HOME/Pictures/wallpapers"
 THUMB_DIR="$HOME/.cache/wallpaper-thumbs"
 ROFI_THEME="$HOME/.config/rofi/wallselector/wallselector.rasi"
-SYMLINK_TARGET="/home/ghostvox/.config/Dot_Files/hypr/current_wallpaper.png"
+SYMLINK_TARGET="$HOME/.config/Dot_Files/hypr/current_wallpaper.png"
 
 mkdir -p "$THUMB_DIR"
 
