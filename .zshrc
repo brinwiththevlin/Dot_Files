@@ -90,10 +90,15 @@ autoload -Uz compinit && compinit
 # --------------------------------------------------------------------------- #
 
 # --- Fastfetch ---
+# Force TempleOS logo for all fastfetch invocations
+fastfetch() {
+  command fastfetch --logo TempleOS "$@"
+}
+
 # Run fastfetch only in interactive shells, not in tmux or ssh sessions.
 if [[ -z "$FASTFETCH_RAN" && -z "$TMUX" && -z "$SSH_CLIENT" ]]; then
-    export FASTFETCH_RAN=1
-    fastfetch --logo Xenia_old
+  export FASTFETCH_RAN=1
+  fastfetch
 fi
 
 # --- Starship Prompt ---
