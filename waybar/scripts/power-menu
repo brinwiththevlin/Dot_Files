@@ -1,4 +1,0 @@
-#!/bin/bash
-# Launch wlogout with your existing configuration
-wlogout --protocol layer-shell
-EOF

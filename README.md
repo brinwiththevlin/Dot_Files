@@ -1,9 +1,9 @@
 # 🚀 Hyprland Dotfiles
-A comprehensive Hyprland configuration featuring Catppuccin Mocha theme, custom Waybar, Rofi menus, and optimized development workflows.
+A comprehensive Hyprland configuration featuring Catppuccin Mocha theme, Noctalia, Rofi menus, and optimized development workflows.
 
 ## 📸 Features
 - **Window Manager**: Hyprland with smooth animations and custom workspace rules
-- **Status Bar**: Waybar with custom modules (weather, updates, system stats, calendar integration)
+- **Desktop Shell**: Noctalia for the panel, launcher, wallpaper, and control center
 - **Application Launcher**: Rofi with multiple custom menus (apps, emoji, wallpaper picker, power menu)
 - **Notifications**: SwayNC with custom styling
 - **Terminal**: Ghostty (primary) & Kitty with Catppuccin theme
@@ -25,7 +25,7 @@ A comprehensive Hyprland configuration featuring Catppuccin Mocha theme, custom 
 #### Core System (Arch Linux)
 ```bash
 # Base packages
-sudo pacman -S hyprland waybar rofi mako kitty wlogout grim slurp \
+sudo pacman -S hyprland rofi kitty grim slurp \
                wl-clipboard pipewire pipewire-alsa pipewire-pulse \
                wireplumber pavucontrol networkmanager network-manager-applet \
                xdg-desktop-portal-hyprland blueman nautilus firefox chromium
@@ -40,9 +40,6 @@ sudo pacman -S rustup go nodejs npm aws-cli docker git
 # Additional tools
 sudo pacman -S hyprpaper hyprlock hypridle brightnessctl playerctl \
                cliphist imagemagick btop baobab qalculate-gtk gnome-calendar
-
-# Waybar dependencies
-sudo pacman -S pacman-contrib  # Provides checkupdates for Waybar updates module
 
 # Security
 sudo pacman -S ufw
@@ -96,7 +93,6 @@ hyprpm enable hyprmodoro
 [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.backup
 [ -f ~/.ideavimrc ] && mv ~/.ideavimrc ~/.ideavimrc.backup
 [ -d ~/.config/hypr ] && mv ~/.config/hypr ~/.config/hypr.backup
-[ -d ~/.config/waybar ] && mv ~/.config/waybar ~/.config/waybar.backup
 # Add more backups as needed
 ```
 
@@ -115,7 +111,6 @@ cd ~/.config
 # Create symbolic links for all configurations
 ln -sf ~/Dot_files/hypr ./hypr
 ln -sf ~/Dot_files/kitty ./kitty
-ln -sf ~/Dot_files/waybar ./waybar
 ln -sf ~/Dot_files/rofi ./rofi
 ln -sf ~/Dot_files/swaync ./swaync
 ln -sf ~/Dot_files/wlogout ./wlogout
@@ -126,47 +121,7 @@ ln -sf ~/Dot_files/.zshrc ~/.zshrc
 ln -sf ~/Dot_files/starship.toml ~/.config/starship.toml
 ```
 
-### 3. Set Up Weather API (Optional)
-Create a `.env` file in the waybar directory:
-
-```bash
-cd ~/.config/waybar
-echo 'WEATHER_API_KEY=your_api_key_here' > .env
-```
-
-Get your free API key from [WeatherAPI.com](https://www.weatherapi.com/)
-
-### 4. Configure Waybar Updates Module
-The Waybar updates module requires `pacman-contrib` for the `checkupdates` command. Make sure it's installed:
-
-```bash
-sudo pacman -S pacman-contrib
-```
-
-The updates module script is located at `~/.config/waybar/scripts/updates.sh` and provides:
-- **Cached updates**: Checks for updates hourly to reduce system load
-- **File locking**: Prevents multiple simultaneous update checks
-- **Click actions**: Click the updates indicator to open a terminal and run system updates
-
-**Terminal Customization**: By default, updates are performed in Kitty. To use a different terminal, edit `~/.config/waybar/scripts/updates.sh` line 46:
-
-```bash
-# Change from:
-kitty -e sudo /usr/bin/pacman -Syu
-
-# To your preferred terminal, e.g.:
-alacritty -e sudo /usr/bin/pacman -Syu
-# or
-foot -e sudo /usr/bin/pacman -Syu
-```
-
-The module automatically:
-- Displays the number of available updates
-- Shows total installed packages in the tooltip
-- Refreshes on demand when clicked
-- Updates Waybar after performing system updates
-
-### 5. Install Rust, Go, and Node.js
+### 3. Install Rust, Go, and Node.js
 The `.zshrc` automatically configures PATH for these tools:
 
 ```bash
@@ -227,7 +182,7 @@ mkdir -p ~/Pictures/Screenshots
 # Create screencasts directory for video recordings
 mkdir -p ~/Videos/Screencasts
 
-# Create cache directory for Waybar (updates module)
+# Create the cache directory used by desktop utilities
 mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}"
 
 # Place your wallpapers in ~/Pictures/wallpapers
@@ -290,8 +245,8 @@ mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}"
 ### Utilities
 | Keybinding | Action |
 |------------|--------|
-| Click date in Waybar | Open GNOME Calendar |
-| Click updates in Waybar | Run system update |
+| Open Noctalia control center | Open desktop controls |
+| Open Noctalia launcher | Launch applications and commands |
 
 ## 📁 Structure
 ```
@@ -299,13 +254,8 @@ Dot_files/
 ├── hypr/              # Hyprland configuration
 │   ├── hyprland.conf  # Main config
 │   └── config/        # Split configs
-├── waybar/            # Status bar
-│   ├── .env           # Weather API key (create this)
-│   ├── config.jsonc   # Waybar configuration
-│   ├── style.css      # Waybar styling
-│   └── scripts/       # Custom scripts
-│       ├── updates.sh # System updates module
-│       └── wttr.py    # Weather module
+├── noctalia/          # Desktop shell configuration
+│   └── config.toml    # Wallpaper, clock, location, and weather settings
 ├── rofi/              # Application launcher & menus
 ├── kitty/             # Kitty terminal
 ├── swaync/            # Notification daemon
@@ -320,39 +270,13 @@ Dot_files/
 ### Changing Theme Colors
 The Catppuccin Mocha theme is defined in:
 - `rofi/colors/ghostvox.rasi`
-- `waybar/style.css`
+- `noctalia/config.toml`
 - `kitty/current-theme.conf`
 - `swaync/style.css`
 - `hypr/mocha.conf`
 
-### Modifying Waybar Modules
-Edit `waybar/config.jsonc` to add/remove modules. Custom scripts are in `waybar/scripts/`
-
-#### Waybar Updates Module
-The updates module (`waybar/scripts/updates.sh`) supports several options:
-
-**Configuration in `waybar/config.jsonc`:**
-```jsonc
-"custom/updates": {
-    "exec": "~/.config/waybar/scripts/updates.sh",
-    "return-type": "json",
-    "interval": 3600,  // Check every hour
-    "on-click": "~/.config/waybar/scripts/updates.sh update",
-    "on-click-right": "~/.config/waybar/scripts/updates.sh refresh"
-}
-```
-
-**Script options:**
-- `./updates.sh` - Output JSON for Waybar (default)
-- `./updates.sh official` - Display simple text format
-- `./updates.sh update` - Perform system update in terminal
-- `./updates.sh refresh` - Force cache refresh
-
-**Customizing cache duration:**
-Edit line 8 in `updates.sh`:
-```bash
-CACHE_MAX_AGE=3600  # Change to desired seconds (e.g., 7200 for 2 hours)
-```
+### Customizing Noctalia
+Edit `noctalia/config.toml` to change wallpaper behavior, clock formatting, location, and weather settings. Validate changes with `noctalia config validate ~/.config/noctalia/config.toml`.
 
 ### Adding Custom Rofi Menus
 Create new menu configs in `rofi/` following the existing pattern in `launchers/` or `powermenu/`
@@ -372,18 +296,6 @@ monitor = HDMI-A-2,3840x2160@120,2560x0,1.5
 - Verify starship is installed: `which starship`
 - Reload shell: `source ~/.zshrc`
 
-### Waybar not showing weather
-- Ensure you have a valid API key in `~/.config/waybar/.env`
-- Check internet connection
-- Run `~/.config/waybar/scripts/wttr.py` manually to debug
-
-### Waybar updates module not working
-- Ensure `pacman-contrib` is installed: `sudo pacman -S pacman-contrib`
-- Check if `checkupdates` command works: `checkupdates`
-- Make the script executable: `chmod +x ~/.config/waybar/scripts/updates.sh`
-- Test the script manually: `~/.config/waybar/scripts/updates.sh`
-- Check cache permissions: `ls -la ~/.cache/waybar-updates*`
-
 ### Hyprland not starting
 - Check logs: `cat /tmp/hypr/$(ls -t /tmp/hypr/ | head -n 1)/hyprland.log`
 - Ensure all required packages are installed
@@ -396,7 +308,7 @@ monitor = HDMI-A-2,3840x2160@120,2560x0,1.5
 - **Hyprland**: [hyprland.org](https://hyprland.org)
 - **Catppuccin Theme**: [catppuccin.com](https://catppuccin.com)
 - **Rofi Themes**: Based on adi1090x's collection
-- **Waybar**: Custom configuration
+- **Noctalia**: Desktop shell configuration
 - **Icons**: Nerd Fonts
 
 ## 📄 License

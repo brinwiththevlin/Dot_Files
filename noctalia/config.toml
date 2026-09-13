@@ -1,0 +1,13 @@
+[wallpaper]
+directory = "~/Pictures/wallpapers"
+
+[widget.clock]
+tooltip_format = "{:%A, %B %d, %Y}"
+
+[location]
+auto_locate = true
+
+[weather]
+enabled = true
+refresh_minutes = 30
+unit = "imperial"

@@ -1,1 +1,33 @@
-hypr/current_wallpaper
+# This repository tracks deliberate desktop and shell configuration only.
+# Everything else in ~/.config remains local and is ignored by default.
+*
+
+!.gitignore
+!.gitmodules
+!README.md
+
+# Hyprland and its user-facing helpers
+!hypr/
+!hypr/**
+hypr/current_wallpaper*
+hypr/recording.mkv
+
+# Terminal, editor, prompt, launcher, notifications, and session controls
+!kitty/
+!kitty/**
+kitty/*.bak
+kitty/themes/
+!lazygit/
+!lazygit/**
+!nvim
+!rofi/
+!rofi/**
+!noctalia/
+!noctalia/config.toml
+!swaync/
+!swaync/**
+!starship.toml
+!waybar/
+!waybar/**
+!wlogout/
+!wlogout/**
